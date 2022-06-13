@@ -5,15 +5,16 @@ import Message from "../Dialogs/Message/index";
 
 
 const Dialog = (props) => {
-  let dialogs = props.messagePage.dialogs.map((d) => (
+  let dialogs = props.dialogs.map((d) => (
     <DialogItem name={d.name} id={d.id} />
   ));
+  console.log(props.message, 44141);
 
-  let message = props.messagePage.message.map((m) => (
+  let message = props.message.map((m) => (
     <Message message={m.message} id={m.id} />
   ));
 
-  let newMessageBody = props.messagePage.newMassagebody;
+  let newMessageBody = props.newMassagebody;
 
   let onNewMessageChange = (e) => {
     let body = e.target.value;
