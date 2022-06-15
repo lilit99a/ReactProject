@@ -1,37 +1,18 @@
+import { act } from "react-dom/test-utils";
+
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+const SET_TOTAL_COUNT = "SET_TOTAL_COUNT";
+const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 
 let initialState = {
-  users: [
-    {
-      id: 1,
-      photo:
-        "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80",
-      followed: "false",
-      fullName: "Dmitriy",
-      status: "I am fine",
-      location: { city: "Vanadzor", country: "Armenia" },
-    },
-    {
-      id: 2,
-      photo:
-        "https://media.istockphoto.com/photos/confident-asian-woman-trying-to-help-her-customers-picture-id1352462896?b=1&k=20&m=1352462896&s=170667a&w=0&h=aYIYAc8DgWoSgeQBVy3g4FKKvJa_B1kD_3DOvWCPSYY=",
-      followed: "true",
-      fullName: "Nelli",
-      status: "I am so happy ))))))",
-      location: { city: "Erevan", country: "Armenia" },
-    },
-    {
-      id: 3,
-      photo:
-        "https://us.123rf.com/450wm/sorrapongs/sorrapongs1708/sorrapongs170800065/84789926-new-generation-asians-business-woman-using-laptop-at-office-asian-women-sitting-smiling-while-workin.jpg?ver=6",
-      followed: "false",
-      fullName: "Ani",
-      status: "I am eating a pice of cake )))",
-      location: { city: "Spitak", country: "Armenia" },
-    },
-  ],
+  users: [],
+  pageSize: 100,
+  totalUsersCount: 0,
+  currentPage: 1,
+  isFetching: true,
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -59,7 +40,21 @@ export const userReducer = (state = initialState, action) => {
       };
     }
     case SET_USERS: {
-      return { ...state, users: [...state.users, ...action.users] };
+      // return { ...state, users: [...state.users, ...action.users] };
+      return {
+        ...state,
+        users: action.users,
+      };
+    }
+    case SET_CURRENT_PAGE: {
+      console.log(action, "current");
+      return { ...state, currentPage: action.message };
+    }
+    case SET_TOTAL_COUNT: {
+      return { ...state, totalUsersCount: action.message };
+    }
+    case TOGGLE_IS_FETCHING: {
+      return{...state, isFetching: action.message}
     }
     default:
       return state;
@@ -84,5 +79,26 @@ export const setUsersAC = (users) => {
   return {
     type: "SET_USERS",
     users,
+  };
+};
+
+export const setCurrentPageAC = (currentPage) => {
+  return {
+    type: "SET_CURRENT_PAGE",
+    message: currentPage,
+  };
+};
+
+export const setTotalCountAC = (totalUsersCount) => {
+  return {
+    type: "SET_TOTAL_COUNT",
+    message: totalUsersCount,
+  };
+};
+
+export const toggleIsFetchingAC = (isFetching) => {
+  return {
+    type: TOGGLE_IS_FETCHING,
+    message: isFetching
   };
 };

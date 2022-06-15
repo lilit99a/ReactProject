@@ -33,13 +33,13 @@ import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
   return {
-    //message
-    messagePage: state.messagePage,
+    message: state.messagePage.message,
+    dialogs: state.messagePage.dialogs,
+    newMassagebody: state.messagePage.newMassagebody,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  debugger
   return {
     onNewMessageChange: (body) => {
       dispatch(changeNewMassageAction(body));

@@ -1,5 +1,6 @@
 const ADD_POST = "ADD-POST";
 const CHANGE_POST = "CHANGE-POST";
+const SET_USERS_PROFILE = "SET-USERS-PROFILE";
 
 export const addPostActionCreater = (postMessage) => {
   return {
@@ -14,6 +15,13 @@ export const changeNewPostAction = (newText) => {
   };
 };
 
+export const setUsersProfile = (profile) => {
+  return {
+    type: "SET-USERS-PROFILE",
+    message: profile,
+  };
+};
+
 let initialState = {
   posts: [
     { message: "Hiii", id: 1 },
@@ -21,26 +29,29 @@ let initialState = {
     { message: "It's my first post!!", id: 2 },
   ],
   newPostText: "",
+  profile: null
 };
 
 export const profileReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_POST:
-      {
-        let newPost= {
-          id: 5,
-          message: action.message,
-        };
-        let stateCopy = { ...state };
-        // stateCopy.posts.push(newPost);
-        stateCopy.posts = [...state.posts];
-        stateCopy.posts.push(newPost);
-        return stateCopy;
-      }
+    case ADD_POST: {
+      let newPost = {
+        id: 5,
+        message: action.message,
+      };
+      let stateCopy = { ...state };
+      // stateCopy.posts.push(newPost);
+      stateCopy.posts = [...state.posts];
+      stateCopy.posts.push(newPost);
+      return stateCopy;
+    }
     case CHANGE_POST: {
       let stateCopy = { ...state };
       stateCopy.newPostText = action.newText;
       return stateCopy;
+    }
+    case SET_USERS_PROFILE: {
+      return {...state, profile: action.message}
     }
     default:
       return state;

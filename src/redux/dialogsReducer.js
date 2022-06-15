@@ -25,12 +25,13 @@ export const dialogsREducer = (state = initislState, action) => {
       state.newMassagebody = action.message;
       return state;
     case SEND_MESSAGE:
-      console.log(action.message,5555);
-      debugger
-      const body = action.message;
+      console.log(state.newMassagebody,5555);
+      const body = state.newMassagebody;
       state.newMassagebody = "";
-      state.message.push({ message:  body, id: 5 });
-      return state;
+      const stateCopy = {...state}
+      stateCopy.message = [...state.message] 
+      stateCopy.message.push({ message:  body, id: 5 });
+      return stateCopy;
     default:
       return state;
   }
