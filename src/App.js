@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
-import Header from "./Header";
-import NavAndContent from "./NavandContent";
+import HeaderContainer from "./Header/headerContainer";
 import { Route, Routes } from "react-router-dom";
 import News from "./News";
 import UsersContainer from "./Users/usersContainer";
@@ -11,7 +10,7 @@ import NavAndContentContainer from "./NavandContent/navAndContentCont"
 const App = (props) => {
   return (
     <div className="App">
-      <Header />
+      <HeaderContainer />
       <div className="componentNavDialog">
         <div className="app-wrapper-content">
           <Routes>
@@ -27,6 +26,7 @@ const App = (props) => {
             />
             <Route
               path="/"
+              defaultParams={{param: "userID"}}
               element={
                 <NavAndContentContainer
                   // posts={props.state.profilePage.posts}
