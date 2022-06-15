@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import  userPhoto from "../images/user.png"
 import style from "../Users/style.module.css"
 
@@ -32,9 +33,14 @@ const Users = (props) => {
           <div key={u.id}>
             <span>
               <div>
+                <NavLink to = {"/"}>
                 <img
                   src={u.photos.small != null ? u.photos.small : userPhoto}
                 />
+                </NavLink>
+                {/* <img
+                  src={u.photos.small != null ? u.photos.small : userPhoto}
+                /> */}
               </div>
               <div>
                 {u.followed ? (
