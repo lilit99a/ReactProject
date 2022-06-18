@@ -15,7 +15,6 @@ class NavAndContentContainer extends React.Component {
     if (!userID) {
       userID = 2;
     }
-    console.log(userID, 555);
     axios
       .get(`https://social-network.samuraijs.com/api/1.0/profile/` + userID)
       .then((response) => {
