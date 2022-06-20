@@ -4,7 +4,6 @@ import Nav from "../../Nav";
 const Message = (props) => {
   return (
       <div>
-        {/* <Nav /> */}
       <div>{props.message}</div>
     </div>
   );
