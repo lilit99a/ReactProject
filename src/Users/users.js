@@ -4,7 +4,6 @@ import userPhoto from "../images/user.png";
 import style from "../Users/style.module.css";
 
 const Users = (props) => {
-  debugger
   let pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
   let pages = [];
@@ -34,7 +33,7 @@ const Users = (props) => {
         <div key={u.id}>
           <span>
             <div>
-              <NavLink to={"/"}>
+              <NavLink to={"/" + u.id}>
                 <img
                   src={u.photos.small != null ? u.photos.small : userPhoto}
                 />
@@ -47,14 +46,14 @@ const Users = (props) => {
               {u.followed ? (
                 <button
                   disabled={props.followingInProgres}
-                  onClick={() => {props.unFollow(u.id)}}
+                  onClick={() => {props.follow(u.id)}}
                 >
                   Unfollow
                 </button>
               ) : (
                 <button
                   disabled={props.followingInProgres}
-                  onClick={() => {props.follow(u.id)}}
+                  onClick={() => {props.unfollow(u.id)}}
                 >
                   {" "}
                   Follow

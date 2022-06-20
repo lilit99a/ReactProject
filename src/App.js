@@ -6,12 +6,15 @@ import News from "./News";
 import UsersContainer from "./Users/usersContainer";
 import DialogConteiner from "./Dialogs/dialogsConteiner";
 import NavAndContentContainer from "./NavandContent/navAndContentCont";
+import Login from "./Login";
+import Nav from "./Nav";
 
 const App = (props) => {
   return (
     <div className="App">
       <HeaderContainer />
       <div className="componentNavDialog">
+        <Nav/>
         <div className="app-wrapper-content">
           <Routes>
             <Route
@@ -41,6 +44,7 @@ const App = (props) => {
             </Route>
             <Route path="/news" element={<News />} />
             <Route path="users" element={<UsersContainer />} />
+            <Route path="login" element= {<Login />} />
           </Routes>
         </div>
       </div>
