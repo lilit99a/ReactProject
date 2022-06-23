@@ -2,8 +2,10 @@ import {
   changeNewMassageAction,
   sendNewMessageAcction,
 } from "../redux/dialogsReducer";
-import Dialog from ".";
 import { connect } from "react-redux";
+import {withAuthReducer} from "../HOC/index"
+import { compose } from "redux";
+import Dialog from "./index"
 
 // const DialogConteiner = (props) => {
 //   let dialogs = props.state.messagePage.dialogs.map((d) => (
@@ -50,5 +52,10 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const DialogConteiner = connect(mapStateToProps, mapDispatchToProps)(Dialog);
-export default DialogConteiner;
+// let AuthReducerComponent = withAuthReducer(DialogConteiner)
+
+// const DialogConteiner = connect(mapStateToProps, mapDispatchToProps)(AuthReducerComponent);
+ export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withAuthReducer
+)(Dialog)

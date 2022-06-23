@@ -1,13 +1,13 @@
 import { connect } from "react-redux";
 import React from "react";
 import NavAndContent from "./index";
-import axios from "axios";
-import { setUsersProfile } from "../redux/profileReducer";
 import  {
   useLocation,
   useNavigate,
   useParams,
 } from "react-router-dom";
+import {getUsesProfile, getStatus, updateStatus, onStatusChange} from "../redux/profileReducer"
+import { compose } from "redux";
 
 class NavAndContentContainer extends React.Component {
   componentDidMount() {
@@ -15,15 +15,12 @@ class NavAndContentContainer extends React.Component {
     if (!userID) {
       userID = 2;
     }
-    axios
-      .get(`https://social-network.samuraijs.com/api/1.0/profile/` + userID)
-      .then((response) => {
-        this.props.setUsersProfile(response.data);
-      });
+    this.props.getUsesProfile(userID)
+    this.props.getStatus(userID)
   }
 
   render() {
-    return <NavAndContent {...this.props} profile={this.props.profile} />;
+    return <NavAndContent {...this.props} profile={this.props.profile} status = {this.props.status} updateStatus = {this.props.updateStatus} onStatusChange = {this.props.onStatusChange} />;
   }
 }
 
@@ -31,6 +28,7 @@ const mapStateToProps = (state) => {
   return {
     posts: state.profilePage.posts,
     profile: state.profilePage.profile,
+    status:state.profilePage.status,
   };
 };
 function withRouter(NavAndContentContainer) {
@@ -49,5 +47,5 @@ function withRouter(NavAndContentContainer) {
   return WithRouterURL;
 }
 
-// const WithRouterURL = withRouter(NavAndContentContainer);
-export default connect(mapStateToProps, { setUsersProfile })(withRouter(NavAndContentContainer));
+export default compose(connect(mapStateToProps, {getUsesProfile, getStatus,updateStatus,onStatusChange })(withRouter(NavAndContentContainer))) 
+

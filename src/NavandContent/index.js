@@ -1,14 +1,13 @@
 import React from "react";
-import Nav from "../Nav/index"
 import classes from "../NavandContent/style.module.css"
 import ContentContainer from "../Content/contentCont"
 
 const NavAndContent = (props) => {
+  // debugger
   return (
     <div className={classes.navAndContent}>
-      <Nav />
       {/* <ContentContainer posts = {props.posts}  dispatch = {props.dispatch}/> */}
-      <ContentContainer profile = {props.profile} />
+      <ContentContainer profile = {props.profile} status = {props.status} updateStatus = {props.updateStatus} onStatusChange = {props.onStatusChange}/>
     </div>
   );
 };
