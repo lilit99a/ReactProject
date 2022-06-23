@@ -6,7 +6,8 @@ import  {
   useNavigate,
   useParams,
 } from "react-router-dom";
-import {getUsesProfile} from "../redux/profileReducer"
+import {getUsesProfile, getStatus, updateStatus, onStatusChange} from "../redux/profileReducer"
+import { compose } from "redux";
 
 class NavAndContentContainer extends React.Component {
   componentDidMount() {
@@ -14,12 +15,12 @@ class NavAndContentContainer extends React.Component {
     if (!userID) {
       userID = 2;
     }
-    console.log(userID, "userId222");
     this.props.getUsesProfile(userID)
+    this.props.getStatus(userID)
   }
 
   render() {
-    return <NavAndContent {...this.props} profile={this.props.profile} />;
+    return <NavAndContent {...this.props} profile={this.props.profile} status = {this.props.status} updateStatus = {this.props.updateStatus} onStatusChange = {this.props.onStatusChange} />;
   }
 }
 
@@ -27,6 +28,7 @@ const mapStateToProps = (state) => {
   return {
     posts: state.profilePage.posts,
     profile: state.profilePage.profile,
+    status:state.profilePage.status,
   };
 };
 function withRouter(NavAndContentContainer) {
@@ -45,5 +47,5 @@ function withRouter(NavAndContentContainer) {
   return WithRouterURL;
 }
 
-// const WithRouterURL = withRouter(NavAndContentContainer);
-export default connect(mapStateToProps, {getUsesProfile })(withRouter(NavAndContentContainer));
+export default compose(connect(mapStateToProps, {getUsesProfile, getStatus,updateStatus,onStatusChange })(withRouter(NavAndContentContainer))) 
+

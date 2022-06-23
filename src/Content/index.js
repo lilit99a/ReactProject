@@ -1,8 +1,9 @@
 import React from "react";
-import classes from "./style.module.css";
 import AddPostContainer from "./MyPosts/AddPost/postContainer";
 import Preloader from "../Preloader/index"
 import SomePost  from "./MyPosts/Posts/SomePost";
+import ProfileStatus from "./MyPosts/ProfileStatus";
+import userPhoto from "../images/user.png";
 
 const Content = (props) => {
    let postElement = props.posts.map( p =>  <SomePost message = {p.message} id= {p.id}/>)
@@ -11,16 +12,12 @@ const Content = (props) => {
     return <Preloader />
   }
   return (
-
-    <div className={classes.content}>
-      <img
-        className = {classes.img1}
-        src="https://www.searchenginejournal.com/wp-content/uploads/2018/10/How-to-Boost-Your-Images%E2%80%99-Visibility-on-Google-Images-760x400.png"
-      />
+    <div>
        <div>
-       <img src = {props.profile.photos.large} />
+       <img src = {props.profile.photos.large ? props.profile.photos.large : userPhoto } />
      </div>
       {/* <AddPostContainer dispatch={props.dispatch} /> */}
+      <ProfileStatus status = {props.status} updateStatus = {props.updateStatus} userId = {props.profile.userId} onStatusChange = {props.onStatusChange}/>
       <AddPostContainer />
       <div>
         <ul>
@@ -30,7 +27,6 @@ const Content = (props) => {
         </ul>
       </div>
      {postElement} 
-     
     </div>
   );
 };
